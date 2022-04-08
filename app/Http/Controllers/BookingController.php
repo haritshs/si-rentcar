@@ -34,15 +34,21 @@ class BookingController extends Controller
         $data = DB::table('pelanggans')->where('nama', 'like', "%$get%")->get();
         //$data = Pelanggan::where('nama', 'like', "%$get%")->get();
     
-		$output = "<ul class='ul-pelanggan'>";
-		if(count($data) != 0){
-			foreach($data as $row){
-				$output .= "<li class='li-pelanggan'>".$row->pelanggan_id. " - " .$row->nama."</li>";
-			}
-		}else {
-			$output .= '<li class="li-client-null">Belum mendaftar? <a href="" data-toggle="modal" data-target="#clientModal"> Klik disini untuk daftar!</a></li>';
-		}
-		echo $output;
+        if($get == null){
+            Alert::error('gagal', 'anda harus daftar!');
+        }
+        else{
+            $output = "<ul class='ul-pelanggan'>";
+            if(count($data) != 0){
+                foreach($data as $row){
+                    $output .= "<li class='li-pelanggan'>".$row->pelanggan_id. " - " .$row->nama."</li>";
+                }
+            }else {
+                $output .= '<li class="li-client-null">Belum mendaftar? <a href="" data-toggle="modal" data-target="#clientModal"> Klik disini untuk daftar!</a></li>';
+                
+            }
+            echo $output;
+        }
     }
 
     public function createClient(request $request){
@@ -107,6 +113,10 @@ class BookingController extends Controller
 
         //get pelanggan
         $pelanggan = Pelanggan::find($request->pelanggan_id);
+        if($pelanggan == null){
+            Alert::toast('Gagal!', 'warning');
+            return redirect()->route('booking.index');
+        }
         
         //return view('pengguna.booking-details', compact('tgl_kembali', 'data', 'mobil', 'total_harga', 'dp', 'pelanggan'));
         return view('booking.details', compact('tgl_kembali', 'data', 'mobil', 'total_harga', 'dp', 'supir', 'tujuan', 'pelanggan'));

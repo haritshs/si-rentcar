@@ -80,6 +80,7 @@
 
     <!-- AdminLTE App -->
     <script src="{{ asset('dist/js/adminlte.min.js') }}"></script>
+
     <!-- DataTables -->
     <script src="{{ asset('plugins/datatables/jquery.dataTables.js') }}"></script>
     <script src="{{ asset('plugins/datatables/dataTables.bootstrap4.js') }}"></script>

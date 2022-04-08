@@ -26,6 +26,10 @@
                             <input type="text" class="form-control" required name="name" value="{{ old('name') }}" >
                         </div>
                         <div class="form-group">
+                            <p>Role</p>
+                            <input type="text" class="form-control" required name="role" value="admin" readonly>
+                        </div>
+                        <div class="form-group">
                             <p>Email</p>
                             <input type="email" class="form-control" required name="email" value="{{ old('email') }}">
                         </div>
@@ -45,6 +49,5 @@
             </form>
         </div>
     </div>
-</section> 
-
+</section>
 @endsection

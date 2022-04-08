@@ -10,11 +10,16 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-Route::get('/', function () {
+//use App\Mobil;
+/*Route::get('/', function () {
     $data['title'] = "Login ";
     return view('auth.login', $data);
-})->middleware('guest');
+})->middleware('guest');*/
+Route::get('/', function(){
+    //$data['mobils'] = Mobil::where('status_sewa', "1")->get();
+    //return view('booking.index', $data);
+    return redirect()->route('booking.index');
+});
 
 Auth::routes();
 
@@ -45,28 +50,29 @@ Route::group(['middleware' => ['auth', 'checkRole:admin']], function(){
     Route::get('laporan/transaksi', 'LaporanController@index');
 });
 
+//Route::group(['middleware' => ['', '']], function(){
 
-//booking daftar iki seng iso
-Route::get('booking/daftar', ['as' => 'pelanggan.create', 'uses' => 'PelangganController@create']);
+    //booking daftar iki seng iso
+    Route::get('booking/daftar', ['as' => 'pelanggan.create', 'uses' => 'PelangganController@create']);
 
-Route::get('booking', ['as' => 'booking.index', 'uses' => 'BookingController@index' ]);
+    Route::get('booking', ['as' => 'booking.index', 'uses' => 'BookingController@index' ]);
 
-Route::get('booking/mobil', ['as' => 'booking.mobil', 'uses' => 'BookingController@mobil']);
+    Route::get('booking/mobil', ['as' => 'booking.mobil', 'uses' => 'BookingController@mobil']);
 
-//Route::get('booking/daftar',['as' => 'pelanggan.create', 'uses' => 'PelangganController@create']);
+    //Route::get('booking/daftar',['as' => 'pelanggan.create', 'uses' => 'PelangganController@create']);
 
-//Route::post('booking',['as' => 'pelanggan.store', 'uses' => 'PelangganController@store']);
+    //Route::post('booking',['as' => 'pelanggan.store', 'uses' => 'PelangganController@store']);
 
-Route::get('list-member', 'BookingController@listMember');
+    Route::get('list-member', 'BookingController@listMember');
 
-Route::post('create-client', ['as' => 'create-client', 'uses' => 'BookingController@createClient' ]);
-//Route::get('booking/pesan', ['as' => 'list-member', 'uses' => 'BookingController@listMember']);
+    Route::post('create-client', ['as' => 'create-client', 'uses' => 'BookingController@createClient' ]);
+    //Route::get('booking/pesan', ['as' => 'list-member', 'uses' => 'BookingController@listMember']);
 
-Route::post('booking/details', ['as' => 'booking.hitung', 'uses' => 'BookingController@hitung']);
+    Route::post('booking/details', ['as' => 'booking.hitung', 'uses' => 'BookingController@hitung']);
 
-Route::post('booking/proses', ['as' => 'booking.proses', 'uses' => 'BookingController@proses']);
+    Route::post('booking/proses', ['as' => 'booking.proses', 'uses' => 'BookingController@proses']);
 
-
+//}
 
 //Route::get('pelanggan', 'PelangganController@index');
 

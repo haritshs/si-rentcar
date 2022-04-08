@@ -43,12 +43,14 @@ class KaryawanController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
+            'role' => 'required|string|max:45',
             'name' => 'required|string|max:150',
             'email' => 'required|string|max:150|unique:users',
             'password' => 'required|string|min:6|confirmed',
         ]);
         if($this) {
             $input = [];
+            $input['role'] = $request->role;
             $input['name'] = $request->name;
             $input['email'] = $request->email;
             $input['password'] = bcrypt($request->password);
